@@ -1,0 +1,26 @@
+
+	Shapiro-Wilk normality test
+
+data:  unlist(pcc_matrix)
+W = 0.98806, p-value = 0.9137
+
+[1] "If p.value 0.913737244423489 is greater 0.05, we can assume normality"
+
+	Wilcoxon signed rank test
+
+data:  pcc_matrix$BC and pcc_matrix$LP
+V = 104, p-value = 0.3146
+alternative hypothesis: true location shift is not equal to 0
+
+
+	Welch Two Sample t-test
+
+data:  pcc_matrix$BC and pcc_matrix$LP
+t = -1.2877, df = 43.945, p-value = 0.2046
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -0.24832751  0.05471288
+sample estimates:
+  mean of x   mean of y 
+-0.18186374 -0.08505642 
+
