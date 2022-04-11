@@ -18,7 +18,7 @@ Here is a list of acronyms and their respective expansions that are commonly use
 * GDSC = external dataset, expanded is: Genomics of Drug Sensitivity in Cancer [URL](https://www.cancerrxgene.org/gdsc1000/GDSC1000_WebResources/Home.html)
 * h = human
 * HK = Hyeyeon Kim, first author
-* ibaq-adj lfq
+* ibaq-adj lfq = iBAQ and LFQ (label-free quantitation) are measurements of protein intensity in proteomics, here it is iBAQ-adjusted by LFQ, see Methods
 * m = mouse
 * MEC = mammary epithelial cell
 * PAM50 = breast cancer subtyping method, expanded is: Prediction Analysis of Microarray 50
