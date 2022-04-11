@@ -1,15 +1,15 @@
-# Cell count
-# table(b2$broadcelltype)
-# Mature luminal Luminal progenitor              Basal 
-# 2172               3364                         1272 
+#' Purpose:
+#' To create UMAP plots of celltype + cc phase annotations as well as Geminin gene expression
 
+# Remove all objects in environment except b2 (b2 = Seurat object)
 rm(list=ls()[!ls()%in%"b2"])
-# Final plots
+
+# Import libraries
 library(kazutils)
 load_packages(c("Seurat"))
 
 # # Data 
-b2 <- readRDS("../annotated_Seurat_b2.rds")
+# b2 <- readRDS("../annotated_Seurat_b2.rds")
 
 # Out directory
 out_dir <- kazutils::create_folder("Final Plots")
@@ -23,7 +23,7 @@ Phase_colors <- readRDS("../colors_Revelio_ccPhase.rds")
 # New identities
 Idents(b2) <- b2$broadcelltype2
 
-## 1. UMAPs
+## UMAPs
 p1 <- DimPlot(b2, group.by = "Revelio_ccPhase", cols = Phase_colors, reduction = "umapharmony", pt.size = 0.1)+
   theme(legend.position = "bottom")
 p2 <- DimPlot(b2, group.by = "broadcelltype2", cols = cell_colors, reduction = "umapharmony", pt.size = 0.1)+

@@ -1,18 +1,24 @@
-# Added Seurat's CellCycleScoring cell cycle phase annotation to it in step 1_...R
-# This script finds enrichment of damage genes in total and individual MEC
-# looks at GMNN+ cells too
+#' Purpose:
+#' To find finds enrichment of damage genes in all cells and GMNN+ cells.
+#' 
+#' Added cell cycle phase annotation in script 1.R
+#' Added "RAD51_set", "HR", "NHEJ" in script 2.R
 
-rm(list=ls()[!ls() %in% "b2"])
-# Libraries
+# Remove all objects in environment except b2 (b2 = Seurat object)
+rm(list=ls()[!ls()%in%"b2"])
+
+# Import R libraries
 library(kazutils)
-load_packages(c("Seurat", "ggridges", "ggplot2", "cowplot", "dplyr"))
+load_packages(c("Seurat", "ggplot2", "cowplot", "dplyr"))
+
+# Import functions
 source("../plot_boxplot.R")
 
 # Out directory
 out_dir <- kazutils::create_folder("Plots")
 
 # Data 
-# b2 <- readRDS("../annotated_Seurat_b2.rds")
+b2 <- readRDS("../annotated_Seurat_b2.rds")
 
 # Colors
 cell_colors <- readRDS("../colors_broadcelltype2.rds")

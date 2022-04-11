@@ -1,16 +1,23 @@
-# June 24, 2010
-# I modified Alison's code.
+#' Purpose: 
+#' To read in ibaq-adj lfq proteome expression data, and make the following modifications:
+#' a) make all gene unique in the matrix, 
+#' b) impute zeros with a random value between 1 and 1.5 (for later stats purposes)
+#' c) log2 the data - transform data (log2) so it will be normally distributed.
+#' Save backups as files and RData
+#' 
+#' Credits: modified Alison Casey's code. 
+
+# Clear R environment
 rm(list=ls())
-# This script allows one to read in ibaq-adj lfq proteome expression data, and make the following modifications:
-# a) make all gene unique in the matrix, 
-# b) impute zeros with a random value between 1 and 1.5 (for later stats purposes)
-# c) log2 the data - transform data (log2) so it will be normally distributed.
-# We then save backups as files and RData
 
-# Input: LFQ-adjusted IBAQ values (total proteome)
-
-## Call libraries
+# Import R libraries
 library(cluster) #for diana clustering
+library(scales)
+library(pheatmap)
+library(RColorBrewer)
+
+# Import functions
+source("plot_m_heatmap_functions.R") # plot mouse (m) heatmap
 
 # Input: LFQ-adjusted IBAQ values (total proteome)## Read in proteome data
 m.pint <- read.csv(file = "casey_IBAQadjustedLFQ_mouse_proteome_sort.csv")
@@ -28,17 +35,14 @@ any(duplicated(m.pint$gene)) #FALSE
 m.pint <- m.pint[order(m.pint$gene),] 
 m.pint -> m.ibaq.original
 
-# CREATE Z SCORE MATRIX -----------------
-library(scales)
-library(pheatmap)
-library(RColorBrewer)
-
-# Define helper functions
+# Define helper functions to create Z score matrix
+# This function replaces all 1s in a vector x with a random value between start_index and last_index
 replace_ones_with_double <- function(x, start_index, last_index){
   x[x == 1]<- runif(sum(x == 1), start_index, last_index)
   return(x)
 }
-# computes and returns matrix with z scores for heatmap plotting
+
+# This function computes and returns matrix with z scores for heatmap plotting
 compute_z_scores <- function(matrix){
   # Formula for z score: 
   #         [element x - mean of row x is in]/ standard deviation of row x is in
@@ -76,40 +80,32 @@ m_exp_matrix -> m.imputed.log2
 m_exp_matrix_z <- compute_z_scores(m_exp_matrix)
 m_exp_matrix_z -> m.z.scores
 
+# Save R data file
 save(m.ibaq.original, m.ibaq, m.imputed, m.imputed.log2, m.z.scores, file = "mouse_proteome.RData")
 
-# # Rescale data column-wise
-
-##
-# --------------------
-library(cluster)
-# Make dendograms
+# Make dendograms -by Alison Casey
+## a) For samples (columns)
 dist_samples <- as.dist(1-cor(m_exp_matrix,
                               #use = "pairwise.complete.obs",
                               method = "pearson"))
 hclust_samples <- hclust(dist_samples)
-#DIvisive ANAlysis Clustering
+# Plot
 png("sample_dendogram.png")
 plot(as.dendrogram(hclust_samples)) 
 dev.off()
-## NB: can combine into one line of code but gets confusing
 
-# Protein dendrogram m.pint
+## b) For proteins (rows)
 dist_proteins <- as.dist(1-cor(t(m_exp_matrix),
                                #use = "pairwise.complete.obs",
                                method = "pearson"))
 # be prepared - this next line of code takes like 5 minutes
 hclust_proteins <- hclust(dist_proteins) #DIvisive ANAlysis Clustering
 
-###
+# Save RData
 save(hclust_samples, dist_samples, hclust_proteins, dist_proteins, file = "mouse_dendograms.RData")
-#-------------------------------------------------------
-library(pheatmap)
-source("plot_m_heatmap.R")
+
+# Plot heatmap
 plot_mouse_heatmap(m_exp_matrix_z, "mouse_heatmap.png", NA, cell_type_samples, hormone_samples,hclust_proteins, hclust_samples)
 
-
-## Save final matrix with only EP 
-
-
+# Save final matrix with only EP 
 save(m.imputed.log2, file = "mouse_imputed.log2.RData")

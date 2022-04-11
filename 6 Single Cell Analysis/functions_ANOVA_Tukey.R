@@ -1,4 +1,4 @@
-# Perform ANOVA on each group
+#' Functions to perform ANOVA on each group
 #' @param df2 Data frame with two columns in this order: 1) groups (factor/character), 2) numeric values
 perform_ANOVA_Tukey <- function(df2){
   colnames(df2) <- c("group2", "vals")
@@ -16,6 +16,9 @@ perform_ANOVA_Tukey <- function(df2){
     p_value = pval,
     TukeyHSD = q$group2)
 }
+
+
+#' Get label text of values
 #' @param df2 Data frame with two columns in this order: 1) groups (factor/character), 2) numeric values
 get_ANOVA_Tukey_text <- function(df2, label =""){
   colnames(df2) <- c("group2", "vals")

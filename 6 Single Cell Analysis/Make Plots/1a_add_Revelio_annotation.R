@@ -1,16 +1,16 @@
-#' Mar 2, 2021 KA
-#' Modified Curtis' script - interrogates reduction mammoplasty single cell data used in Mathepan's paper
-#' Look for expression of genes in different cell cycle (cc) phases using Revelio package
-#'
-#' This script adds Revelio (cc package) ccPhase, ccAngle, etc annotations to cells meta data
+#' Purpose:
+#' To look for expression of genes in different cell cycle (cc) phases using Revelio package.
+#' This script adds Revelio (cc package) ccPhase, ccAngle, etc annotations to Seurat cells meta data
 #' 
+#' Credit: Curtis McCloskey created, normalized and interrogated reduction mammoplasty single cell data in Mathepan's paper (https://github.com/mcclo/Mahendralingam-et-al.-Nat-Metab)
+#' modified Mar 2, 2021
 
-# Libraries
+# Import required R packages
 library(kazutils)
 load_packages(c("Seurat", "plyr", "Revelio", "viridis", "HGNChelper"))
 # library(scClustViz) # BiocManager::install("scClustViz")
 
-# Load Seurat object
+# Load Seurat object # this data file was too large to upload
 load("../Data/b2_obj_only.RData")
 
 # Make a column with shortened cell type names

@@ -1,11 +1,24 @@
+#' Purpose:
+#' To get a stacked barplot showing the number of cells in each cc phase (y axis=count) in each celltype (x, bar)   
+#' 
+#' 
+#' Total Cell count
+# table(b2$broadcelltype)
+# Mature luminal Luminal progenitor              Basal 
+# 2172               3364                         1272 
+
+# Remove all objects in environment except b2 (b2 = Seurat object)
 rm(list=ls()[!ls()%in%"b2"])
 
-# Libraries
+# Import libraries
 library(kazutils)
 load_packages(c("Seurat", "ggplot2", "dplyr", "viridis"))
 
 # Out directory
 out_dir <- kazutils::create_folder("Final Plots")
+
+# # Data 
+# b2 <- readRDS("../annotated_Seurat_b2.rds")
 
 # Colors
 Phase_colors <- readRDS("../colors_Revelio_ccPhase.rds")
@@ -28,8 +41,9 @@ df <- do.call(rbind.data.frame, df)
 df$celltype <- kazutils::get_nth_part(rownames(df), "\\.", 1)
 head(df)
 
-library(ggplot2)
+# Inititate file
 pdf(sprintf("%s/1_cell_number.pdf", out_dir))
+# Plot
 ggplot(df, aes(x = celltype, y = Freq, fill = Var1)) +
   geom_bar(stat = "identity", position = position_dodge(), width = .8, na.rm = T) + # bars
   scale_fill_manual(name = "Phase", values = Phase_colors) +
@@ -48,6 +62,7 @@ ggplot(df, aes(x = celltype, y = Freq, fill = Var1)) +
         plot.caption = element_text(size=13, face = "bold", colour = "black"),
         text = element_text(size=20)
   )
+# End file
 dev.off()
 
 # Write to file
@@ -69,6 +84,8 @@ df2 <- data.frame(CellType = c(get_nth_part(rownames(df), "\\.", 1), rep("Total"
                   CellCount = c(df$Freq, as.numeric(cnts)))
 
 head(df2)
+
+# Write data to file
 write.csv(df2, file = sprintf("%s/1_cell_number_Revelio_ccPhase.csv", out_dir), row.names = F)
 
 
