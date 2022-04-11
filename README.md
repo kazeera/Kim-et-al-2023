@@ -2,12 +2,12 @@
 R code used to interrogate and visualize omics and other data published Kim et al 2021
 
 
-## R package versions
-R.Package | Version | Use | Reference
+### R Packages Used
+R Package | Version | Use | Reference
 :- |:- |:- |:- |
 R | 4.1.0 | Computing language | R Core Team (2021). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. 
-Seurat | 4.0.2 | Single-cell (sc) object | Hao and Hao et al. Integrated analysis of multimodal single-cell data. bioRxiv (2020) [URL](https://satijalab.org/seurat/)
-Revelio | 0.1.0 | Sc cell cycle annotation | [URL](https://www.embopress.org/doi/full/10.15252/msb.20209946)
+Seurat | 4.0.2 | Single-cell (sc) object | Hao and Hao et al (2020). Integrated analysis of multimodal single-cell data. bioRxiv. [URL](https://satijalab.org/seurat/)
+Revelio | 0.1.0 | Sc cell cycle annotation | Schwabe, Daniel, et al (2020). The transcriptome dynamics of single cells during the cell cycle. Molecular systems biology 16.11. [URL](https://www.embopress.org/doi/full/10.15252/msb.20209946)
 plyr | 1.8.6 | Mapvalues | Hadley Wickham (2011). The Split-Apply-Combine Strategy for Data Analysis. Journal of Statistical Software, 40(1), 1-29. [URL](http://www.jstatsoft.org/v40/i01/)
 viridis | 0.6.1 | Sc color palette | Simon Garnier, Noam Ross, Robert Rudis, Antônio P. Camargo, Marco Sciaini, and Cédric Scherer (2021). Rvision - Colorblind-Friendly Color Maps for R. R package version 0.6.1.
 HGNChelper | 0.8.1 | Check symbols for Revelio cell cycle markers | Levi Waldron and Markus Riester (2019). HGNChelper: Identify and Correct Invalid HGNC Human Gene Symbols and MGI Mouse Gene Symbols. R package version 0.8.1. [URL](https://f1000research.com/articles/9-1493)
