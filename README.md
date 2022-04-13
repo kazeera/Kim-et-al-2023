@@ -20,7 +20,7 @@ Here is a list of acronyms and their respective expansions that are commonly use
 * HK = Hyeyeon Kim, first author
 * ibaq-adj lfq = iBAQ and LFQ (label-free quantitation) are measurements of protein intensity in proteomics, here it is iBAQ-adjusted by LFQ, see Methods
 * m = mouse
-* MEC = mammary epithelial cell
+* MEC = mammary epithelial cell(s)
 * PAM50 = breast cancer subtyping method, expanded is: Prediction Analysis of Microarray 50
 * PCC = Pearson correlation coefficient
 * ssgsea = Computational method from GSVA package, single-sample gene set enrichment analysis
