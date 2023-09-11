@@ -1,5 +1,5 @@
 # Kim-et-al-2022
-This repository contains code used to interrogate and visualize omics and other data published Kim et al. 2022, Nature Communications. Read on biorxiv [here](https://www.biorxiv.org/content/10.1101/2021.05.14.444217v1).
+This repository contains code used to interrogate and visualize omics and other data published Kim et al. 2023, Cell Reports. Read on biorxiv [here](https://www.biorxiv.org/content/10.1101/2021.05.14.444217v1).
 
 ### Acronym Dictionary
 Here is a list of acronyms and their respective expansions that are commonly used in the code.
