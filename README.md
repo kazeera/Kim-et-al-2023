@@ -1,4 +1,4 @@
-# Kim-et-al-2022
+# Kim-et-al-2023
 This repository contains code used to interrogate and visualize omics and other data published Kim et al. 2023, Cell Reports. Read on biorxiv [here](https://www.biorxiv.org/content/10.1101/2021.05.14.444217v1).
 
 ### Acronym Dictionary
