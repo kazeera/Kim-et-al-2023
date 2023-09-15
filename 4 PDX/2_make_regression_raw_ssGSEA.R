@@ -17,11 +17,13 @@ out_dir <- create_folder("Plots")
 
 # Read in data file
 df <- read.csv("merged_ann_ssgsea_table.csv",stringsAsFactors = F)
-rownames(df) <- make.unique(df$Patient.ID)
+
+# Reformat
+rownames(df) <- make.unique(as.character(df$Patient.ID))
 cts <- colnames(df)[grep("ssGSEA$" , colnames(df))]
-corr_method = "pearson"
 
 ## REGRESSION
+# Colors
 cell_type_colors <-  c(BC = "red", LM="darkblue", LP="deepskyblue3")
 PAM50_colors <- c(LumA="mediumpurple1", LumB="mediumpurple4", Basal="seagreen1", Normal="seagreen", HER2="goldenrod1", Unknown="gray")
 
@@ -32,14 +34,15 @@ df$PAM50_2[! df$PAM50_2 %in% c("Basal", "Normal")] <- "Other"
 # Get max and min for axes so we can post
 Y_MAX <- ceiling(max(df$angle)) +20
 Y_MIN <- floor(min(df$angle))
-PT_SIZE <- 1
+PT_SIZE <- 2.5
 FONT_SIZE <- 15
 
 # Comparisons (input columns of df)
 comps <- c("BC_ssGSEA", "LP_ssGSEA", "LM_ssGSEA")
 
 ## Individual regressions with equation
-pdf(sprintf("%s/2_regression_ssGSEA.pdf", out_dir))
+pdf(sprintf("%s/2_%s_regression_ssGSEA.pdf", out_dir, format(Sys.Date(), "%Y%m%d")))
+corr_method = "pearson"
 
 for(column in comps){
         # Get column values

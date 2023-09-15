@@ -11,7 +11,7 @@ source("make_heatmap.R")
 
 # Read in data file
 df <- read.csv("merged_ann_ssgsea_table.csv", stringsAsFactors = F)
-rownames(df) <- make.unique(df$Patient.ID)
+rownames(df) <- make.unique(as.character(df$Patient.ID))
 
 # Out folder
 output_folder <- kazutils::create_folder("Plots")
@@ -74,22 +74,22 @@ col_fun = circlize::colorRamp2(c(-10, 50, 164), c("orangered4", "white", "darkgr
 row_ha2 <- rowAnnotation(BMN_angle = df$angle,
                          PAM50 = df$PAM50,
                          col = list(PAM50 = PAM50_colors, BMN_angle = col_fun, BMN_Response = colors_response))
-# dev.off()
 # Unsupervised hierarchal clustering
-# win.graph()
 row_ha <- rowAnnotation(Response = row_anno_barplot(t(freq2), gp=gpar(fill=colors_response)),
                         # Main = df$Main.Response,
                         col = list(Response = colors_response))
 
 # Save to file
-pdf(sprintf("1_%s_Cescon PDX heatmap.pdf", format(Sys.Date(), "%Y%m%d")))
+pdf(sprintf("Plots/1_%s_Cescon PDX heatmap.pdf", format(Sys.Date(), "%Y%m%d")))
+
 # win.graph()
+# Plot heatmap
 Heatmap(mat, 
         name = "ssGSEA score",
         cluster_rows = T,
         show_row_names = T,
         heatmap_width = unit(10, "cm"), 
-        right_annotation = row_ha,
+        # right_annotation = row_ha, # bargraph
         left_annotation = row_ha2,
         row_names_gp = gpar(col = "black", fontsize = 7))
 
@@ -98,7 +98,7 @@ dev.off()
 mat_s <- apply(mat, 2, function(x) scales::rescale(x, c(-2,2)))
 
 # Save to file
-pdf(sprintf("1_%s_Cescon PDX heatmap_scaled.pdf", format(Sys.Date(), "%Y%m%d")))
+pdf(sprintf("Plots/1_%s_Cescon PDX heatmap_scaled.pdf", format(Sys.Date(), "%Y%m%d")))
 # win.graph()
 Heatmap(mat_s, 
         name = "ssGSEA score",
@@ -111,17 +111,12 @@ Heatmap(mat_s,
 
 dev.off()
 
-win.graph()
-scales::show_col(colors_response[c("CR", "PR", "SD", "PD")], ncol = 1, labels = F)# names(colors_response)) 
+scales::show_col(colors_response[c("CR", "PR", "SD", "PD")], labels = F)# names(colors_response)) 
 ## Todo colors for stacked bar plot no leegend ?? 
 colors_response
 # See that the colors match up
 rownames(freq2)
 # [1] "CR" "PD" "SD" "PR"
-freq2[,"REF016"]
-# [1] 1 1 1 0
-freq2[,"NOTCH06"]
-# [1] 0 1 1 0
 
 names(freq2) <- gsub("X", "", names(freq2))
 saveRDS(freq2, "1_freq_BMN_qualitative_response.rds")
