@@ -1,5 +1,7 @@
 # Kim-et-al-2023
-This repository contains code used to interrogate and visualize omics and other data published Kim et al. 2023. Read on biorxiv [here](https://www.biorxiv.org/content/10.1101/2021.05.14.444217v1).
+[![DOI](https://zenodo.org/badge/doi/10.5281/zenodo.18914.svg)](http://dx.doi.org/10.5281/zenodo.8368552)
+
+This repository contains code used to interrogate and visualize omics and other data published Kim et al. 2023. Read preprint on biorxiv [here](https://www.biorxiv.org/content/10.1101/2021.05.14.444217v1).
 
 ### Acronym Dictionary
 Here is a list of acronyms and their respective expansions that are commonly used in the code.
